@@ -9,6 +9,25 @@ version: "3.1"
 # 8085 | Orders
 
 services:
+  # Kong API Gateway
+  kong:
+    image: kong
+    restart: always
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+    environment:
+      KONG_DATABASE: "off"  # Use in-memory datastore for development
+      KONG_PROXY_LISTEN: "0.0.0.0:8000, 0.0.0.0:8443 ssl"
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001"
+    volumes:
+      - ./kong.yml:/etc/kong/kong.yml  # Mount the Kong configuration file
+    depends_on:
+      - product-service
+      - order-service
+    command: kong start -c /etc/kong/kong.yml
+
   # Products ----------------------------------------------------------------
   product-service:
     build:

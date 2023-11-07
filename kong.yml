@@ -1,0 +1,18 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+  - name: product-service
+    url: http://product-service:80
+
+    routes:
+      - name: products
+        paths:
+          - /products
+  - name: order-service
+    url: http://order-service:80
+
+    routes:
+      - name: orders
+        paths:
+          - /orders
