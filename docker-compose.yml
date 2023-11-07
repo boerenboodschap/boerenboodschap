@@ -1,8 +1,73 @@
-version: "3"
+version: "3.1"
+
+# API ports
+# 8080 | Products
+# 8083 | Orders
+
+# Mongo express ports
+# 8082 | Products
+# 8085 | Orders
+
 services:
+  # Products ----------------------------------------------------------------
   product-service:
     build:
       context: ../product-service/src/
       dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ProductDatabase__ConnectionString=mongodb://root:example@product-mongo:27017/
     ports:
       - "8080:80"
+      - "8081:443"
+
+  product-mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  product-mongo-express:
+    depends_on:
+      - product-mongo
+    image: mongo-express
+    restart: always
+    ports:
+      - 8082:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@product-mongo:27017/
+
+  # Orders ----------------------------------------------------------------
+
+  order-service:
+    build:
+      context: ../order-service/src/
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - OrderDatabase__ConnectionString=mongodb://root:example@order-mongo:27017/
+    ports:
+      - "8083:80"
+      - "8084:443"
+
+  order-mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  order-mongo-express:
+    depends_on:
+      - order-mongo
+    image: mongo-express
+    restart: always
+    ports:
+      - 8085:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@order-mongo:27017/
