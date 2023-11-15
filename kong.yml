@@ -1,18 +1,746 @@
-_format_version: "3.0"
-_transform: true
-
-services:
-  - name: product-service
-    url: http://product-service:80
-
-    routes:
-      - name: products
-        paths:
-          - /products
-  - name: order-service
-    url: http://order-service:80
-
-    routes:
-      - name: orders
-        paths:
-          - /orders
+"pg_max_concurrent_queries": 0,
+"pg_semaphore_timeout": 60000,
+"nginx_admin_client_max_body_size": "10m",
+"nginx_admin_client_body_buffer_size": "10m",
+"client_body_buffer_size": "8k",
+"pg_ro_ssl": false,
+"pg_ro_ssl_required": false,
+"pg_ro_ssl_verify": false,
+"pg_host": "kong-quickstart-database",
+"pg_database": "kong",
+"pg_user": "kong",
+"tracing_sampling_rate": 0.01,
+"ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"nginx_http_ssl_protocols": "TLSv1.2 TLSv1.3",
+"nginx_stream_ssl_protocols": "TLSv1.2 TLSv1.3",
+"ssl_prefer_server_ciphers": "on",
+"nginx_http_ssl_prefer_server_ciphers": "off",
+"nginx_stream_ssl_prefer_server_ciphers": "off",
+"lua_max_req_headers": 100,
+"nginx_http_ssl_dhparam": "ffdhe2048",
+"nginx_stream_ssl_dhparam": "ffdhe2048",
+"ssl_session_tickets": "on",
+"nginx_http_ssl_session_tickets": "on",
+"lua_max_resp_headers": 100,
+"ssl_session_timeout": "1d",
+"nginx_http_ssl_session_timeout": "1d",
+"nginx_stream_ssl_session_timeout": "1d",
+"ssl_session_cache_size": "10m",
+"proxy_access_log": "/dev/stdout",
+"proxy_error_log": "/dev/stderr",
+"proxy_stream_access_log": "logs/access.log basic",
+"proxy_stream_error_log": "logs/error.log",
+"admin_access_log": "/dev/stdout",
+"admin_error_log": "/dev/stderr",
+"admin_gui_access_log": "logs/admin_gui_access.log",
+"admin_gui_error_log": "logs/admin_gui_error.log",
+"status_access_log": "off",
+"status_error_log": "logs/status_error.log",
+"debug_access_log": "off",
+"debug_error_log": "logs/debug_error.log",
+"lua_ssl_trusted_certificate": [
+  "/etc/ssl/certs/ca-certificates.crt"
+],
+"lua_ssl_verify_depth": 1,
+"nginx_http_lua_ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"nginx_stream_lua_ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"lua_socket_pool_size": 256,
+"cluster_control_plane": "127.0.0.1:8005",
+"cluster_mtls": "shared",
+"tracing_write_strategy": "file",
+"cluster_data_plane_purge_delay": 1209600,
+"cluster_ocsp": "off",
+"cluster_allowed_common_names": {},
+"cluster_max_payload": 16777216,
+"cluster_use_proxy": false,
+"cluster_dp_labels": {},
+"pluginserver_names": {},
+"untrusted_lua": "sandbox",
+"untrusted_lua_sandbox_requires": {},
+"untrusted_lua_sandbox_environment": {},
+"allow_inconsistent_data_plane_plugins": false,
+"lmdb_environment_path": "dbless.lmdb",
+"lmdb_map_size": "2048m",
+"opentelemetry_tracing": [
+  "off"
+],
+"opentelemetry_tracing_sampling_rate": 0.01,
+"proxy_server_ssl_verify": true,
+"admin_gui_path": "/",
+"portal_cors_origins": {},
+"upstream_keepalive_pool_size": 512,
+"portal_approved_email": true,
+"mem_cache_size": "128m",
+"cluster_fallback_config_export_delay": 60,
+"cluster_fallback_config_import": false,
+"tracing": false,
+"portal_is_legacy": false,
+"portal_invite_email": true,
+"portal_token_exp": 21600,
+"portal_auto_approve": false,
+"upstream_keepalive_idle_timeout": 60,
+"upstream_keepalive_max_requests": 1000,
+"konnect_mode": false,
+"keyring_strategy": "cluster",
+"portal_smtp_admin_emails": {},
+"tracing_types": {
+  "1": "all",
+  "all": true
+},
+"portal_reset_success_email": true,
+"portal_application_status_email": false,
+"tracing_time_threshold": 0,
+"portal_api_listen": [
+  "0.0.0.0:8004",
+  "0.0.0.0:8447 ssl"
+],
+"portal_reset_email": true,
+"generate_trace_details": false,
+"vitals_prometheus_scrape_interval": 5,
+"portal_gui_ssl_cert_key": "******",
+"admin_gui_auth_header": "******",
+"portal_api_ssl_cert_key": "******",
+"cluster_telemetry_endpoint": "127.0.0.1:8006",
+"keyring_vault_kube_api_token_file": "/run/secrets/kubernetes.io/serviceaccount/token",
+"keyring_vault_kube_role": "default",
+"keyring_vault_auth_method": "token",
+"portal_email_verification": false,
+"portal_auth_login_attempts": 0,
+"portal_api_ssl_cert": {},
+"portal_api_ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"portal_api_error_log": "logs/portal_api_error.log",
+"portal_api_access_log": "logs/portal_api_access.log",
+"portal_gui_ssl_cert": {},
+"portal_gui_ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"admin_gui_ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"admin_invitation_expiry": 259200,
+"admin_emails_from": "\"\"",
+"admin_gui_auth_login_attempts": 0,
+"admin_gui_flags": "{}",
+"audit_log_payload_exclude": [
+  "token",
+  "secret",
+  "password"
+],
+"audit_log_record_ttl": 2592000,
+"audit_log_ignore_tables": {},
+"audit_log_ignore_paths": {},
+"audit_log_ignore_methods": {},
+"analytics_debug": false,
+"analytics_buffer_size_limit": 100000,
+"analytics_flush_interval": 1,
+"vitals_statsd_prefix": "kong",
+"rbac_auth_header": "Kong-Admin-Token",
+"portal_api_ssl_cert_key_default_ecdsa": "/usr/local/kong/ssl/portal-api-kong-default-ecdsa.key",
+"cluster_telemetry_listen": [
+  "0.0.0.0:8006"
+],
+"portal_api_ssl_cert_default_ecdsa": "/usr/local/kong/ssl/portal-api-kong-default-ecdsa.crt",
+"portal_gui_ssl_cert_key_default": "/usr/local/kong/ssl/portal-gui-kong-default.key",
+"wasm": false,
+"portal_gui_ssl_cert_key_default_ecdsa": "/usr/local/kong/ssl/portal-gui-kong-default-ecdsa.key",
+"portal_gui_ssl_cert_default_ecdsa": "/usr/local/kong/ssl/portal-gui-kong-default-ecdsa.crt",
+"portal_api_ssl_cert_key_default": "/usr/local/kong/ssl/portal-api-kong-default.key",
+"portal_api_ssl_cert_default": "/usr/local/kong/ssl/portal-api-kong-default.crt",
+"nginx_portal_gui_err_logs": "/usr/local/kong/logs/portal_gui_error.log",
+"nginx_portal_gui_acc_logs": "/usr/local/kong/logs/portal_gui_access.log",
+"nginx_portal_api_err_logs": "/usr/local/kong/logs/portal_api_error.log",
+"nginx_portal_api_acc_logs": "/usr/local/kong/logs/portal_api_access.log",
+"smtp_admin_emails": {},
+"lua_package_cpath": "",
+"event_hooks_enabled": false,
+"portal": false,
+"rbac": "off",
+"enforce_rbac": "off",
+"ssl_cert_key": "******",
+"ssl_cipher_suite": "intermediate",
+"ssl_ciphers": "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384",
+"nginx_main_directives": [
+  {
+    "name": "daemon",
+    "value": "off"
+  },
+  {
+    "name": "user",
+    "value": "kong kong"
+  },
+  {
+    "name": "worker_processes",
+    "value": "auto"
+  },
+  {
+    "name": "worker_rlimit_nofile",
+    "value": "auto"
+  }
+],
+"nginx_events_directives": [
+  {
+    "name": "multi_accept",
+    "value": "on"
+  },
+  {
+    "name": "worker_connections",
+    "value": "auto"
+  }
+],
+"cluster_listeners": [
+  {
+    "ipv6only=on": false,
+    "ssl": false,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "listener": "0.0.0.0:8005",
+    "bind": false,
+    "port": 8005,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "deferred": false,
+    "reuseport": false,
+    "backlog=%d+": false
+  }
+],
+"nginx_http_directives": [
+  {
+    "name": "charset",
+    "value": "UTF-8"
+  },
+  {
+    "name": "client_body_buffer_size",
+    "value": "8k"
+  },
+  {
+    "name": "client_max_body_size",
+    "value": "0"
+  },
+  {
+    "name": "keepalive_requests",
+    "value": "1000"
+  },
+  {
+    "name": "lua_regex_cache_max_entries",
+    "value": "8192"
+  },
+  {
+    "name": "lua_regex_match_limit",
+    "value": "100000"
+  },
+  {
+    "name": "lua_shared_dict",
+    "value": "prometheus_metrics 5m"
+  },
+  {
+    "name": "ssl_dhparam",
+    "value": "/usr/local/kong/ssl/ffdhe2048.pem"
+  },
+  {
+    "name": "ssl_prefer_server_ciphers",
+    "value": "off"
+  },
+  {
+    "name": "ssl_protocols",
+    "value": "TLSv1.2 TLSv1.3"
+  },
+  {
+    "name": "ssl_session_tickets",
+    "value": "on"
+  },
+  {
+    "name": "ssl_session_timeout",
+    "value": "1d"
+  }
+],
+"lua_ssl_protocols": "TLSv1.1 TLSv1.2 TLSv1.3",
+"nginx_upstream_directives": {},
+"nginx_proxy_directives": [
+  {
+    "name": "real_ip_header",
+    "value": "X-Real-IP"
+  },
+  {
+    "name": "real_ip_recursive",
+    "value": "off"
+  }
+],
+"nginx_status_directives": {},
+"route_validation_strategy": "smart",
+"nginx_admin_directives": [
+  {
+    "name": "client_body_buffer_size",
+    "value": "10m"
+  },
+  {
+    "name": "client_max_body_size",
+    "value": "10m"
+  }
+],
+"nginx_stream_directives": [
+  {
+    "name": "lua_shared_dict",
+    "value": "stream_prometheus_metrics 5m"
+  },
+  {
+    "name": "ssl_dhparam",
+    "value": "/usr/local/kong/ssl/ffdhe2048.pem"
+  },
+  {
+    "name": "ssl_prefer_server_ciphers",
+    "value": "off"
+  },
+  {
+    "name": "ssl_protocols",
+    "value": "TLSv1.2 TLSv1.3"
+  },
+  {
+    "name": "ssl_session_tickets",
+    "value": "on"
+  },
+  {
+    "name": "ssl_session_timeout",
+    "value": "1d"
+  }
+],
+"worker_consistency": "eventual",
+"dns_resolver": {},
+"dns_hostsfile": "/etc/hosts",
+"nginx_wasm_wasmtime_directives": {},
+"client_ssl": false,
+"dns_error_ttl": 1,
+"dns_not_found_ttl": 30,
+"dns_stale_ttl": 4,
+"dns_cache_size": 10000,
+"dns_order": [
+  "LAST",
+  "SRV",
+  "A",
+  "CNAME"
+],
+"dns_no_sync": true,
+"nginx_err_logs": "/usr/local/kong/logs/error.log",
+"nginx_acc_logs": "/usr/local/kong/logs/access.log",
+"admin_acc_logs": "/usr/local/kong/logs/admin_access.log",
+"lua_ssl_trusted_certificate_combined": "/usr/local/kong/.ca_combined",
+"keyring_enabled": false,
+"nginx_kong_gui_include_conf": "/usr/local/kong/nginx-kong-gui-include.conf",
+"nginx_kong_conf": "/usr/local/kong/nginx-kong.conf",
+"nginx_kong_stream_conf": "/usr/local/kong/nginx-kong-stream.conf",
+"nginx_inject_conf": "/usr/local/kong/nginx-inject.conf",
+"nginx_kong_inject_conf": "/usr/local/kong/nginx-kong-inject.conf",
+"nginx_kong_stream_inject_conf": "/usr/local/kong/nginx-kong-stream-inject.conf",
+"kong_env": "/usr/local/kong/.kong_env",
+"kong_process_secrets": "/usr/local/kong/.kong_process_secrets",
+"ssl_cert_csr_default": "/usr/local/kong/ssl/kong-default.csr",
+"ssl_cert_default": "/usr/local/kong/ssl/kong-default.crt",
+"ssl_cert_key_default": "/usr/local/kong/ssl/kong-default.key",
+"ssl_cert_default_ecdsa": "/usr/local/kong/ssl/kong-default-ecdsa.crt",
+"ssl_cert_key_default_ecdsa": "/usr/local/kong/ssl/kong-default-ecdsa.key",
+"vitals": false,
+"prefix": "/usr/local/kong",
+"admin_ssl_cert_default": "/usr/local/kong/ssl/admin-kong-default.crt",
+"admin_ssl_cert_key_default": "/usr/local/kong/ssl/admin-kong-default.key",
+"admin_ssl_cert_default_ecdsa": "/usr/local/kong/ssl/admin-kong-default-ecdsa.crt",
+"admin_ssl_cert_key_default_ecdsa": "/usr/local/kong/ssl/admin-kong-default-ecdsa.key",
+"admin_gui_ssl_cert_default": "/usr/local/kong/ssl/admin-gui-kong-default.crt",
+"admin_gui_ssl_cert_key_default": "/usr/local/kong/ssl/admin-gui-kong-default.key",
+"admin_gui_ssl_cert_default_ecdsa": "/usr/local/kong/ssl/admin-gui-kong-default-ecdsa.crt",
+"admin_gui_ssl_cert_key_default_ecdsa": "/usr/local/kong/ssl/admin-gui-kong-default-ecdsa.key",
+"status_ssl_cert_default": "/usr/local/kong/ssl/status-kong-default.crt",
+"admin_ssl_enabled": true,
+"status_ssl_cert_key_default": "/usr/local/kong/ssl/status-kong-default.key",
+"status_ssl_enabled": false,
+"status_ssl_cert_default_ecdsa": "/usr/local/kong/ssl/status-kong-default-ecdsa.crt",
+"enabled_headers_upstream": {
+  "X-Kong-Request-Id": true
+},
+"status_ssl_cert_key_default_ecdsa": "/usr/local/kong/ssl/status-kong-default-ecdsa.key",
+"portal_gui_ssl_cert_default": "/usr/local/kong/ssl/portal-gui-kong-default.crt",
+"lua_max_post_args": 100,
+"lua_package_path": "./?.lua;./?/init.lua;",
+"smtp_mock": true,
+"ssl_cert": [
+  "/usr/local/kong/ssl/kong-default.crt",
+  "/usr/local/kong/ssl/kong-default-ecdsa.crt"
+],
+"proxy_listen": [
+  "0.0.0.0:8000 reuseport backlog=16384",
+  "0.0.0.0:8443 http2 ssl reuseport backlog=16384"
+],
+"admin_listen": [
+  "0.0.0.0:8001",
+  "0.0.0.0:8444 ssl"
+],
+"admin_gui_listen": [
+  "0.0.0.0:8002",
+  "0.0.0.0:8445 ssl"
+],
+"status_listen": [
+  "off"
+],
+"debug_listen": [
+  "off"
+],
+"debug_listen_local": true,
+"stream_listen": [
+  "off"
+],
+"nginx_http_keepalive_requests": "1000",
+"smtp_timeout_send": 60000,
+"admin_gui_ssl_enabled": true,
+"smtp_timeout_connect": 60000,
+"smtp_domain": "localhost.localdomain",
+"stream_proxy_ssl_enabled": false,
+"pg_ssl": false,
+"nginx_http_lua_regex_match_limit": "100000",
+"port_maps": {},
+"smtp_ssl": false,
+"portal_gui_listen": [
+  "0.0.0.0:8003",
+  "0.0.0.0:8446 ssl"
+],
+"smtp_starttls": false,
+"smtp_port": 25,
+"smtp_host": "localhost",
+"anonymous_reports": true,
+"nginx_wasm_main_shm_directives": {},
+"nginx_wasm_wasmer_directives": {},
+"nginx_wasm_v8_directives": {},
+"nginx_sproxy_directives": {},
+"nginx_http_client_body_buffer_size": "8k",
+"nginx_debug_directives": {},
+"nginx_main_worker_processes": "auto",
+"client_ssl_cert_key_default": "/usr/local/kong/ssl/kong-default.key",
+"nginx_main_daemon": "off",
+"vitals_strategy": "database",
+"nginx_events_multi_accept": "on",
+"worker_events_max_payload": 65535,
+"nginx_conf": "/usr/local/kong/nginx.conf",
+"nginx_events_worker_connections": "auto",
+"db_resurrect_ttl": 30,
+"nginx_main_worker_rlimit_nofile": "auto",
+"debug_listeners": {},
+"portal_access_request_email": true,
+"nginx_http_lua_regex_cache_max_entries": "8192",
+"role": "traditional",
+"log_level": "notice",
+"db_update_propagation": 0,
+"database": "postgres",
+"vitals_delete_interval_pg": 30,
+"vitals_flush_interval": 10,
+"stream_listeners": {},
+"db_cache_ttl": 0,
+"host_ports": {},
+"vitals_ttl_seconds": 3600,
+"portal_app_auth": "kong-oauth2",
+"vitals_ttl_minutes": 1500,
+"pg_timeout": 5000,
+"audit_log": false,
+"worker_state_update_frequency": 5,
+"nginx_wasm_main_directives": {},
+"router_flavor": "traditional_compatible",
+"proxy_ssl_enabled": true,
+"db_update_frequency": 5,
+"ssl_dhparam": "ffdhe2048",
+"vitals_statsd_udp_packet_size": 1024,
+"vaults": [
+  "bundled"
+],
+"cluster_fallback_config_export": false,
+"loaded_vaults": {
+  "azure": true,
+  "gcp": true,
+  "hcv": true,
+  "env": true,
+  "aws": true
+},
+"fips": false,
+"loaded_plugins": {
+  "ip-restriction": true,
+  "request-transformer": true,
+  "response-transformer": true,
+  "request-size-limiting": true,
+  "rate-limiting": true,
+  "response-ratelimiting": true,
+  "syslog": true,
+  "loggly": true,
+  "datadog": true,
+  "ldap-auth": true,
+  "statsd": true,
+  "bot-detection": true,
+  "aws-lambda": true,
+  "request-termination": true,
+  "prometheus": true,
+  "proxy-cache": true,
+  "session": true,
+  "acme": true,
+  "grpc-gateway": true,
+  "grpc-web": true,
+  "pre-function": true,
+  "post-function": true,
+  "azure-functions": true,
+  "zipkin": true,
+  "opentelemetry": true,
+  "request-transformer-advanced": true,
+  "response-transformer-advanced": true,
+  "rate-limiting-advanced": true,
+  "ldap-auth-advanced": true,
+  "statsd-advanced": true,
+  "route-by-header": true,
+  "jwt-signer": true,
+  "vault-auth": true,
+  "request-validator": true,
+  "mtls-auth": true,
+  "graphql-proxy-cache-advanced": true,
+  "graphql-rate-limiting-advanced": true,
+  "degraphql": true,
+  "route-transformer-advanced": true,
+  "kafka-log": true,
+  "kafka-upstream": true,
+  "exit-transformer": true,
+  "key-auth-enc": true,
+  "upstream-timeout": true,
+  "mocking": true,
+  "opa": true,
+  "jq": true,
+  "websocket-size-limit": true,
+  "websocket-validator": true,
+  "konnect-application-auth": true,
+  "tls-handshake-modifier": true,
+  "tls-metadata-headers": true,
+  "saml": true,
+  "xml-threat-protection": true,
+  "jwe-decrypt": true,
+  "oas-validation": true,
+  "application-registration": true,
+  "oauth2-introspection": true,
+  "proxy-cache-advanced": true,
+  "openid-connect": true,
+  "forward-proxy": true,
+  "canary": true,
+  "jwt": true,
+  "acl": true,
+  "correlation-id": true,
+  "cors": true,
+  "oauth2": true,
+  "tcp-log": true,
+  "udp-log": true,
+  "file-log": true,
+  "http-log": true,
+  "key-auth": true,
+  "hmac-auth": true,
+  "basic-auth": true
+},
+"portal_gui_use_subdomains": false,
+"headers": [
+  "server_tokens",
+  "latency_tokens",
+  "x-kong-request-id"
+],
+"portal_application_request_email": false,
+"proxy_listeners": [
+  {
+    "ipv6only=on": false,
+    "ssl": false,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "deferred": false,
+    "bind": false,
+    "port": 8000,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "backlog=16384": true,
+    "reuseport": true,
+    "listener": "0.0.0.0:8000 reuseport backlog=16384"
+  },
+  {
+    "ipv6only=on": false,
+    "ssl": true,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "deferred": false,
+    "bind": false,
+    "port": 8443,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": true,
+    "proxy_protocol": false,
+    "backlog=16384": true,
+    "reuseport": true,
+    "listener": "0.0.0.0:8443 ssl http2 reuseport backlog=16384"
+  }
+],
+"admin_listeners": [
+  {
+    "ipv6only=on": false,
+    "ssl": false,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "listener": "0.0.0.0:8001",
+    "bind": false,
+    "port": 8001,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "deferred": false,
+    "reuseport": false,
+    "backlog=%d+": false
+  },
+  {
+    "ipv6only=on": false,
+    "ssl": true,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "listener": "0.0.0.0:8444 ssl",
+    "bind": false,
+    "port": 8444,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "deferred": false,
+    "reuseport": false,
+    "backlog=%d+": false
+  }
+],
+"status_listeners": {},
+"debug_ssl_cert_key": "******",
+"kic": false,
+"smtp_timeout_read": 60000,
+"lua_max_uri_args": 100,
+"db_cache_warmup_entities": [
+  "services"
+],
+"pg_ro_iam_auth": false,
+"pg_iam_auth": false,
+"allow_debug_header": false,
+"tracing_instrumentations": [
+  "off"
+],
+"dedicated_config_processing": true,
+"vitals_ttl_days": 0,
+"request_debug": true,
+"plugins": [
+  "bundled"
+],
+"portal_gui_access_log": "logs/portal_gui_access.log",
+"nginx_http_charset": "UTF-8",
+"nginx_pid": "/usr/local/kong/pids/nginx.pid",
+"portal_gui_error_log": "logs/portal_gui_error.log",
+"nginx_supstream_directives": {},
+"nginx_stream_ssl_session_tickets": "on",
+"_debug_pg_ttl_cleanup_interval": 300,
+"cluster_listen": [
+  "0.0.0.0:8005"
+],
+"admin_ssl_cert": [
+  "/usr/local/kong/ssl/admin-kong-default.crt",
+  "/usr/local/kong/ssl/admin-kong-default-ecdsa.crt"
+],
+"admin_ssl_cert_key": "******",
+"admin_gui_ssl_cert": [
+  "/usr/local/kong/ssl/admin-gui-kong-default.crt",
+  "/usr/local/kong/ssl/admin-gui-kong-default-ecdsa.crt"
+],
+"admin_gui_ssl_cert_key": "******",
+"status_ssl_cert": {},
+"status_ssl_cert_key": "******",
+"debug_ssl_cert": {},
+"portal_gui_host": "127.0.0.1:8003",
+"portal_gui_protocol": "http",
+"nginx_user": "kong kong",
+"nginx_main_user": "kong kong",
+"nginx_daemon": "off",
+"client_ssl_cert_default": "/usr/local/kong/ssl/kong-default.crt",
+"enabled_headers": {
+  "server_tokens": true,
+  "latency_tokens": true,
+  "Via": true,
+  "X-Kong-Upstream-Status": false,
+  "X-Kong-Proxy-Latency": true,
+  "X-Kong-Request-Id": true,
+  "X-Kong-Response-Latency": true,
+  "X-Kong-Admin-Latency": true,
+  "Server": true,
+  "X-Kong-Upstream-Latency": true
+},
+"nginx_worker_processes": "auto",
+"nginx_http_client_max_body_size": "0",
+"headers_upstream": [
+  "x-kong-request-id"
+],
+"trusted_ips": {},
+"real_ip_header": "X-Real-IP",
+"nginx_proxy_real_ip_header": "X-Real-IP",
+"real_ip_recursive": "off",
+"nginx_proxy_real_ip_recursive": "off",
+"error_default_type": "text/plain",
+"admin_approved_email": "true",
+"pg_port": 5432,
+"pg_password": "******",
+"admin_gui_listeners": [
+  {
+    "ipv6only=on": false,
+    "ssl": false,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "listener": "0.0.0.0:8002",
+    "bind": false,
+    "port": 8002,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "deferred": false,
+    "reuseport": false,
+    "backlog=%d+": false
+  },
+  {
+    "ipv6only=on": false,
+    "ssl": true,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "listener": "0.0.0.0:8445 ssl",
+    "bind": false,
+    "port": 8445,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "deferred": false,
+    "reuseport": false,
+    "backlog=%d+": false
+  }
+],
+"pg_ssl_required": false,
+"pg_ssl_verify": false,
+"pg_ssl_version": "tlsv1_2",
+"debug_ssl_enabled": false,
+"cluster_telemetry_listeners": [
+  {
+    "ipv6only=on": false,
+    "ssl": false,
+    "so_keepalive=on": false,
+    "so_keepalive=off": false,
+    "so_keepalive=%w*:%w*:%d*": false,
+    "listener": "0.0.0.0:8006",
+    "bind": false,
+    "port": 8006,
+    "ip": "0.0.0.0",
+    "ipv6only=off": false,
+    "http2": false,
+    "proxy_protocol": false,
+    "deferred": false,
+    "reuseport": false,
+    "backlog=%d+": false
+  }
+]
