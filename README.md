@@ -5,3 +5,13 @@ Repository for development purposes, contains a docker-compose.yml file that can
 1. Clone all repositories of all the microservices in the boerenboodschap organisation.
 2. Run `docker compose`
 3. Enjoy!
+
+## Configurations
+
+### Argo
+
+### Pulumi
+
+### Prometheus
+
+```bash helm install prometheus -f prometheus.yaml prometheus-community/prometheus ```
