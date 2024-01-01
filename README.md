@@ -14,4 +14,6 @@ Repository for development purposes, contains a docker-compose.yml file that can
 
 ### Prometheus
 
-```bash helm install prometheus -f prometheus.yaml prometheus-community/prometheus ```
+```bash
+  helm install prometheus -f prometheus.yaml prometheus-community/prometheus
+```
