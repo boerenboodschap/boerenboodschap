@@ -14,8 +14,12 @@ Repository for development purposes, contains a docker-compose.yml file that can
 
 ### Prometheus
 
-To install prometheus in a kubernetes cluster run the following command:
+To install prometheus in a kubernetes cluster run the following commands:
 
 ```bash
-  helm install prometheus -f prometheus.yaml ./prometheus
+helm dependency build
+```
+
+```bash
+helm install prometheus ./prometheus
 ```
