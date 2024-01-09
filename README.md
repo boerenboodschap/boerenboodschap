@@ -21,5 +21,11 @@ helm dependency build
 ```
 
 ```bash
-helm install prometheus ./prometheus
+helm install prometheus ./prometheus/helm
+```
+
+### Grafana
+
+```bash
+helm install grafana ./grafana/helm
 ```
